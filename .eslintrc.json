@@ -1,3 +1,165 @@
 {
-  "extends": "next/core-web-vitals"
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "react-app",
+    "react-app/jest",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 140,
+        "ignoreUrls": true,
+        "ignoreStrings": true
+      }
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "arraysInObjects": true,
+        "objectsInObjects": false
+      }
+    ],
+    "arrow-parens": "error",
+    "space-before-blocks": [
+      "error",
+      {
+        "functions": "always",
+        "keywords": "always",
+        "classes": "always"
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      {
+        "named": "never",
+        "anonymous": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-unused-vars": "off",
+    "no-param-reassign": "error",
+    "no-prototype-builtins": "off",
+    "no-case-declarations": "off",
+    "multiline-ternary": [
+      "error",
+      "always-multiline"
+    ],
+    //React specific
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/jsx-closing-bracket-location": [
+      "error",
+      {
+        "selfClosing": "line-aligned",
+        "nonEmpty": "line-aligned"
+      }
+    ],
+    "react/jsx-tag-spacing": [
+      "error",
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "always",
+        "beforeClosing": "never"
+      }
+    ],
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "never"
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      {
+        "indentMode": "first"
+      }
+    ],
+    "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    //TS specific
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/typedef": [
+      "error",
+      {
+        "parameter": true,
+      }
+    ],
+    "@typescript-eslint/no-inferrable-types": [
+      "error"
+    ],
+    "@typescript-eslint/member-delimiter-style": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "warn"
+    ],
+    "@typescript-eslint/indent": [
+      "error",
+      4,
+      {
+        "ignoredNodes": [
+          "JSXAttribute",
+          "JSXSpreadAttribute"
+        ],
+        "SwitchCase": 1
+      }
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
 }
