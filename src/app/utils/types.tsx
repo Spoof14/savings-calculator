@@ -9,7 +9,7 @@ export type TableData = {
     bestRank: BestRank;
     continent: string;
     averageCol: string;
-    moneyAfterExpenses: number;
-    moneyAfterRent: number;
+    expenses: number;
+    rent: number;
     moneyAfterAll: number;
 };

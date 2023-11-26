@@ -1,16 +1,11 @@
 'use client'
 import React, { useState } from 'react'
 import { TableData } from '../utils/types'
+import { getSortBy } from '../utils/utils'
 
 
 
-const sortByCountry = (a: TableData, b: TableData) => a.country > b.country ? 1 : -1
-const sortByPay = (a: TableData, b: TableData) => a.netPay === b.netPay ? sortByCountry(a, b) : a.netPay > b.netPay ? 1 : -1
-const sortBy = (a: TableData, b: TableData, ascending: boolean, key: keyof TableData) => {
-    if (a[key] === b[key]) return sortByPay(a, b)
-    if (ascending) return a[key] > b[key] ? 1 : -1
-    return a[key] > b[key] ? -1 : 1
-}
+
 
 type CountryTableProps = { countries: TableData[] }
 type TableDataKey = keyof TableData
@@ -20,8 +15,8 @@ const headers: [TableDataKey, string][] = [
     ['averageTax', 'Tax'],
     ['averageCol', 'COL'],
     ['netPay', 'Net pay'],
-    ['moneyAfterExpenses', 'Money after expenses'],
-    ['moneyAfterRent', 'Money after rent'],
+    ['expenses', 'Expenses'],
+    ['rent', 'Rent'],
     ['moneyAfterAll', 'Money']
 ]
 export const CountryTable = ({ countries }: CountryTableProps) => {
@@ -32,7 +27,8 @@ export const CountryTable = ({ countries }: CountryTableProps) => {
         if (newSort === sortKey) setAscending(oldVal => !oldVal)
         setSortKey(newSort)
     }
-    const sortedData = countries.slice().sort((a: TableData, b: TableData) => sortBy(a, b, ascending, sortKey))
+    const sortByFunc = getSortBy(ascending, sortKey)
+    const sortedData = countries.slice().sort(sortByFunc)
 
     return (
         <table className=' flex-col justify-between flex-1 w-full'>
