@@ -130,7 +130,7 @@
     "@typescript-eslint/typedef": [
       "error",
       {
-        "parameter": true,
+        "parameter": true
       }
     ],
     "@typescript-eslint/no-inferrable-types": [
