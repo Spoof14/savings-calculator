@@ -1,15 +1,10 @@
 import { load } from 'cheerio';
 import colData from '../data/colData.json';
-import { TableData } from './types';
+import { ContinentData, Data, TableData } from './types';
 
 const baseUrl = 'https://de.talent.com/ajax/taxcal/best-of-countries.php?country=de&language=en'
 
 
-export type Data = {
-    salaryBeforeTax: string;
-    countries: TableData[]
-};
-type ContinentData = [string, string, string, string, string]
 
 
 const headers =  {'Cache-Control': 'public, max-age=2592000, immutable'}
@@ -42,7 +37,7 @@ export async function getData(salary = '66000'): Promise<Data> {
 }
 
 
-const makeTableData = (continents: ContinentData[]): TableData[] => {
+export const makeTableData = (continents: ContinentData[]): TableData[] => {
     const frankfurtCol = colData.find(({ city }) => city.includes('Frankfurt'))?.colIndex;
     const frankfurtRent = colData.find(({ city }) => city.includes('Frankfurt'))?.rentIndex;
 

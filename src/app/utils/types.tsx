@@ -1,3 +1,4 @@
+
 type Country = string;
 type NetPay = string;
 type AverageTax = string;
@@ -13,3 +14,14 @@ export type TableData = {
     rent: number;
     moneyAfterAll: number;
 };
+export type TableDataKey = keyof TableData
+
+
+export type Data = {
+    salaryBeforeTax: string;
+    countries: TableData[]
+};
+export type ContinentData = [string, string, string, string, string]
+
+export type Columns = Partial<Record<keyof TableData, boolean>>;
+

@@ -1,25 +1,15 @@
 'use client'
 import React, { useState } from 'react'
-import { TableData } from '../utils/types'
+import { Columns, TableData } from '../utils/types'
 import { getSortBy } from '../utils/utils'
+import { headers } from '../utils/const'
 
 
 
+export type CountryTableProps = { countries: TableData[], columns: Columns }
 
 
-type CountryTableProps = { countries: TableData[] }
-type TableDataKey = keyof TableData
-const headers: [TableDataKey, string][] = [
-    ['country', 'Country'],
-    ['continent', 'Continent'],
-    ['averageTax', 'Tax'],
-    ['averageCol', 'COL'],
-    ['netPay', 'Net pay'],
-    ['expenses', 'Expenses'],
-    ['rent', 'Rent'],
-    ['moneyAfterAll', 'Money']
-]
-export const CountryTable = ({ countries }: CountryTableProps) => {
+export const CountryTable = ({ countries, columns }: CountryTableProps) => {
     const [sortKey, setSortKey] = useState<keyof TableData>('netPay');
     const [ascending, setAscending] = useState(false);
 
@@ -30,11 +20,13 @@ export const CountryTable = ({ countries }: CountryTableProps) => {
     const sortByFunc = getSortBy(ascending, sortKey)
     const sortedData = countries.slice().sort(sortByFunc)
 
+    const visibleHeaders = headers.filter(([header]) => columns[header] !== false)
+
     return (
         <table className=' flex-col justify-between flex-1 w-full'>
             <thead>
                 <tr>
-                    {headers.map(([key, text]) =>
+                    {visibleHeaders.map(([key, text]) =>
                         <th key={key} className='hover:cursor-pointer border-r' onClick={() => onClick(key)}>{text}</th>
                     )}
                 </tr>
@@ -43,7 +35,7 @@ export const CountryTable = ({ countries }: CountryTableProps) => {
                 {
                     sortedData.map((data) =>
                         <tr className='even:bg-slate-900 p-4' key={data.country}>
-                            {headers.map(([key, text]) => <td key={key} className='p-2' >{data[key]}</td>)}
+                            {visibleHeaders.map(([key, text]) => <td key={key} className='p-2' >{data[key]}</td>)}
                         </tr>
                     )
                 }
