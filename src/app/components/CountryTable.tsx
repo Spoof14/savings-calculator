@@ -23,7 +23,7 @@ export const CountryTable = ({ countries, columns }: CountryTableProps) => {
     const visibleHeaders = headers.filter(([header]) => columns[header] !== false);
 
     return (
-        <table className=' flex-col justify-between flex-1 w-full'>
+        <table className='w-full'>
             <thead>
                 <tr>
                     {visibleHeaders.map(([key, text]) =>

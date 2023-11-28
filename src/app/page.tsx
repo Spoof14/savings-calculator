@@ -9,6 +9,7 @@ import { Columns } from './utils/types';
 import { InputGroup } from './components/InputGroup';
 import { Input } from './components/Input';
 import { Select } from './components/Select';
+import Link from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Home({ searchParams }: { searchParams: { salary?: string } }) {
@@ -31,9 +32,10 @@ export default function Home({ searchParams }: { searchParams: { salary?: string
     if (!data) return <div>loading</div>;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-8 gap-4">
-            <header>
+        <main className="flex h-screen overflow-hidden flex-col items-center justify-between p-8 gap-6">
+            <header className='flex w-full items-center justify-between'>
 				COL index and wages for {data?.salaryBeforeTax} euro
+                <SalaryInput searchParamSalary={salary} />
             </header>
             <div className='flex gap-4'>
                 <InputGroup>
@@ -63,7 +65,25 @@ export default function Home({ searchParams }: { searchParams: { salary?: string
                     />
                 ))}
             </div>
-            <CountryTable columns={columns} countries={data.countries} />
+            <div className='flex-col justify-between flex-1 w-full overflow-auto'>
+                <CountryTable columns={columns} countries={data.countries} />
+            </div>
         </main>
     );
 }
+
+
+const SalaryInput = ({ searchParamSalary }: {searchParamSalary?: string}) => {
+    const [salary, setSalary] = useState(searchParamSalary || '66000');
+
+    return <div className='flex items-center gap-1'>
+        <span>Salary</span>
+        <div className='flex'>
+
+            <Input value={salary} inputClassName='rounded-r-none' onChange={(e) => setSalary(e.target.value)} />
+            <Link className='bg-slate-800 rounded-r-sm p-2 hover:bg-slate-600' href={'/?salary=' + salary}>
+			submit
+            </Link>
+        </div>
+    </div>;
+};
