@@ -10,6 +10,7 @@ import { InputGroup } from './components/InputGroup';
 import { Input } from './components/Input';
 import { Select } from './components/Select';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Home({ searchParams }: { searchParams: { salary?: string } }) {
@@ -75,15 +76,20 @@ export default function Home({ searchParams }: { searchParams: { salary?: string
 
 const SalaryInput = ({ searchParamSalary }: {searchParamSalary?: string}) => {
     const [salary, setSalary] = useState(searchParamSalary || '66000');
+    const { push } =  useRouter();
+
+    const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        push('?salary=' + salary);
+    };
 
     return <div className='flex items-center gap-1'>
         <span>Salary</span>
-        <div className='flex'>
-
+        <form className='flex' onSubmit={onSubmit}>
             <Input value={salary} inputClassName='rounded-r-none' onChange={(e) => setSalary(e.target.value)} />
             <Link className='bg-slate-800 rounded-r-sm p-2 hover:bg-slate-600' href={'/?salary=' + salary}>
-			submit
+                submit
             </Link>
-        </div>
+        </form>
     </div>;
 };

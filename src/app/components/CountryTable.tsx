@@ -26,6 +26,7 @@ export const CountryTable = ({ countries, columns }: CountryTableProps) => {
         <table className='w-full'>
             <thead>
                 <tr>
+                    <th className='border-r'>#</th>
                     {visibleHeaders.map(([key, text]) =>
                         <th key={key} className='hover:cursor-pointer border-r' onClick={() => onClick(key)}>{text}</th>
                     )}
@@ -33,8 +34,9 @@ export const CountryTable = ({ countries, columns }: CountryTableProps) => {
             </thead>
             <tbody>
                 {
-                    sortedData.map((data) =>
+                    sortedData.map((data, i) =>
                         <tr className='even:bg-slate-900 p-4' key={data.country}>
+                            <td className='p-2'>{i+1}</td>
                             {visibleHeaders.map(([key, text]) => <td key={key} className='p-2'>{data[key]}</td>)}
                         </tr>
                     )
